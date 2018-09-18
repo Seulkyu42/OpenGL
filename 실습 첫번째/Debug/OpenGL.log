@@ -1,0 +1,3 @@
+﻿  실습 9번.cpp
+c:\users\김민규\source\repos\송컴그\opengl\실습 9번.cpp(15): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+  OpenGL.vcxproj -> C:\Users\김민규\source\repos\송컴그\Debug\OpenGL.exe
