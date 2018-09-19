@@ -108,6 +108,62 @@ void Keyboard(unsigned char key, int x, int y)
 
 		break;
 
+	case '1':
+		loc_x[1] = save_x[1];
+		loc_y[1] = save_y[1];
+		Spin_switch[1] = 1;
+		Direct_Switch[1] = 1;
+		break;
+	case '2':
+		loc_x[2] = save_x[2];
+		loc_y[2] = save_y[2];
+		Spin_switch[2] = 1;
+		Direct_Switch[2] = 1;
+		break;
+	case '3':
+		loc_x[3] = save_x[3];
+		loc_y[3] = save_y[3];
+		Spin_switch[3] = 1;
+		Direct_Switch[3] = 1;
+		break;
+	case '4':
+		loc_x[4] = save_x[4];
+		loc_y[4] = save_y[4];
+		Spin_switch[4] = 1;
+		Direct_Switch[4] = 1;
+		break;
+	case '5':
+		loc_x[5] = save_x[5];
+		loc_y[5] = save_y[5];
+		Spin_switch[5] = 1;
+		Direct_Switch[5] = 1;
+		break;
+	case '6':
+		loc_x[6] = save_x[6];
+		loc_y[6] = save_y[6];
+		Spin_switch[6] = 1;
+		Direct_Switch[6] = 1;
+		break;
+	case '7':
+		loc_x[7] = save_x[7];
+		loc_y[7] = save_y[7];
+		Spin_switch[7] = 1;
+		Direct_Switch[7] = 1;
+		break;
+	case '8':
+		loc_x[8] = save_x[8];
+		loc_y[8] = save_y[8];
+		Spin_switch[8] = 1;
+		Direct_Switch[8] = 1;
+		break;
+	case '9':
+		loc_x[9] = save_x[9];
+		loc_y[9] = save_y[9];
+		Spin_switch[9] = 1;
+		Direct_Switch[9] = 1;
+		break;
+
+
 	}
 }
 
