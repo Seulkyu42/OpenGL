@@ -141,7 +141,7 @@ void TimerFunction(int value)
 // 윈도우 출력 함수
 GLvoid drawScene(GLvoid)
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor((float)B / 255, (float)B / 255, (float)B / 255 , 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	for (int i = 0; i < 10; ++i)

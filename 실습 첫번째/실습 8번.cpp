@@ -30,9 +30,9 @@ void main(int argc, char *argv[])
 // 좌표저장
 int save_x[10], save_y[10];
 
-int sin_degree = 0, cos_degree = 0;
-
-int Point_x[10][1000], Point_y[10][1000];
+double Point_x[10][1000], Point_y[10][1000];
+double temp_x[10][1000], temp_y[10][1000];
+double degree[1000];
 
 // 색상 관련
 int color_switch = 0;
@@ -40,9 +40,11 @@ float B = 0;
 
 int count = 0;
 // 반지름
-float R[10];
+double R[10][1000];
+bool click;
+int Spin[10];
+int reverse[10];
 
-int plus[10];
 
 void Keyboard(unsigned char key, int x, int y)
 {
@@ -53,19 +55,28 @@ void Mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
+		click = true;
+
 		for (int i = count; i < count + 1; ++i)
 		{
-			R[i] = 0;
+			for (int j = 0; j < 1000; ++j)
+			{
+				R[i][j] = 0;
+			}
 		}
 		save_x[count] = x;
 		save_y[count] = y;
-
+		Spin[count] = rand() % 2 + 1;
 		count += 1;
 
 		if (count == 10)
 		{
 			count = 0;
 		}
+	}
+	else
+	{
+		click = false;
 	}
 }
 
@@ -89,17 +100,34 @@ void TimerFunction(int value)
 			color_switch = 0;
 		}
 	}
-	
+
+
 	for (int i = 0; i < 10; ++i)
 	{
-		R[i] += 0.5;
 		for (int j = 0; j < 1000; ++j)
 		{
-			sin_degree += 10;
-			cos_degree += 10;
-
-			Point_x[i][j] = save_x[i] + R[i] * sin(sin_degree);
-			Point_y[i][j] = save_y[i] + R[i] * cos(cos_degree);
+			if (reverse[i] == 0)
+			{
+				R[i][j] += 0.5;
+				degree[j] += 1032;
+				if (R[i][j] >= 100)
+				{
+					reverse[i] = 2;
+				}
+			}
+			else
+			{
+				R[i][j] -= 0.5;
+				degree[j] -= 1032;
+				if (R[i][j] <= 0)
+				{
+					reverse[i] = 0;
+					Spin[i] = 0;
+				}
+			}
+			
+			Point_x[i][j] = save_x[i] + R[i][j] * cos(degree[j]);
+			Point_y[i][j] = save_y[i] + R[i][j] * sin(degree[j]);
 		}
 	}
 
@@ -114,21 +142,21 @@ GLvoid drawScene(GLvoid)
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+
+	glColor4f(1.0f, 0.0f, 0.5f, 1.0f);
+	glPointSize(7.0);
+	glBegin(GL_POINTS);
 	for (int i = 0; i < 10; ++i)
 	{
-		for (int j = 0; j < 1000; ++j)
+		if (Spin[i] == 1)
 		{
-
-
-			glColor4f(1.0f, 0.0f, 0.5f, 1.0f);
-			glPointSize(7.0);
-			glBegin(GL_POINTS);
-			glVertex2i(Point_x[i][j], Point_y[i][j]);
-			glEnd();
-		}
+			for (int j = 0; j < 1000; ++j)
+			{
+				glVertex2f(Point_x[i][j], Point_y[i][j]);
+			}	
+		}		
 	}
-
-
+	glEnd();
 
 	glFlush();
 }

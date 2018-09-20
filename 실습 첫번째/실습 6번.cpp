@@ -82,9 +82,11 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 	case '+':
 		Speed += 1;
+		printf("Speed : %d", Speed);
 		break;
 	case '-':
 		Speed -= 1;
+		printf("Speed : %d", Speed);
 		break;
 	case 's':
 		Speed = 0;
@@ -96,14 +98,22 @@ void Keyboard(unsigned char key, int x, int y)
 
 		if (cnt == 10)
 		{
+			printf("초기화!\n");
 			cnt = 0;
+			for (int i = 0; i < 10; ++i)
+			{
+
+				Spin_switch[i] = 0;
+				Direct_Switch[i] = 0;
+			}
 		}
 
 		loc_x[cnt] = save_x[cnt];
 		loc_y[cnt] = save_y[cnt];
-		Spin_switch[cnt] = 1;
+		Spin_switch[cnt] = rand() % 2 + 1;
 		Direct_Switch[cnt] = 1;
 
+		printf("Spin : %d\n", Spin_switch[cnt]);
 		cnt += 1;
 
 		break;
@@ -174,6 +184,7 @@ void Mouse(int button, int state, int x, int y)
 
 		if (count == 10)
 		{
+
 			count = 0;
 		}
 		left_button = true;
@@ -241,6 +252,7 @@ void TimerFunction(int value)
 
 	for (int i = 0; i < 10; ++i)
 	{
+		// 정방향
 		if (Spin_switch[i] == 1)
 		{	
 			if (Direct_Switch[i] == 1)
@@ -250,7 +262,7 @@ void TimerFunction(int value)
 				{
 					Direct_Switch[i] = 2;
 				}
-				else if (save_x[i] == loc_x[i]+Speed)
+				else if (loc_x[i] + 5 <= save_x[i] && save_x[i] <= loc_x[i] + 30)
 				{
 					Spin_switch[i] = 0;
 				}
@@ -267,6 +279,47 @@ void TimerFunction(int value)
 			{
 				save_x[i] += Speed;
 				if (save_x[i] >= 780)
+				{
+					Direct_Switch[i] = 4;
+				}
+			}
+			if (Direct_Switch[i] == 4)
+			{
+				save_y[i] -= Speed;
+				if (save_y[i] <= loc_y[i])
+				{
+					Direct_Switch[i] = 1;
+				}
+			}
+		}
+
+		//역방향
+		if (Spin_switch[i] == 2)
+		{
+			if (Direct_Switch[i] == 1)
+			{
+				save_x[i] += Speed;
+				if (save_x[i] >= 780)
+				{
+					Direct_Switch[i] = 2;
+				}
+				else if (loc_x[i] - 5 >= save_x[i] && save_x[i] >= loc_x[i] - 30)
+				{
+					Spin_switch[i] = 0;
+				}
+			}
+			if (Direct_Switch[i] == 2)
+			{
+				save_y[i] += Speed;
+				if (save_y[i] >= 580)
+				{
+					Direct_Switch[i] = 3;
+				}
+			}
+			if (Direct_Switch[i] == 3)
+			{
+				save_x[i] -= Speed;
+				if (save_x[i] <= 20)
 				{
 					Direct_Switch[i] = 4;
 				}

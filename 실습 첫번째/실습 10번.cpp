@@ -160,7 +160,7 @@ void TimerFunction(int value)
 		if (reverse[i] == 0 && animation[i] == 0)
 		{
 			width[i] += 5;
-			if (width[i] == 20)
+			if (width[i] >= 20)
 			{
 				reverse[i] = 1;
 			}
@@ -168,7 +168,7 @@ void TimerFunction(int value)
 		else if (reverse[i] == 1 && animation[i] == 0)
 		{
 			width[i] -= 5;
-			if (width[i] == 0)
+			if (width[i] <= 0)
 			{
 				reverse[i] = 0;
 			}
@@ -179,6 +179,8 @@ void TimerFunction(int value)
 			R[i] = rand() % 255;
 			G[i] = rand() % 255;
 			B[i] = rand() % 255;
+
+			width[i] = 50;
 
 			if (change[i] == 0)
 			{
