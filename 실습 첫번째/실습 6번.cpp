@@ -82,11 +82,11 @@ void Keyboard(unsigned char key, int x, int y)
 		break;
 	case '+':
 		Speed += 1;
-		printf("Speed : %d", Speed);
+		printf("Speed : %d\n", Speed);
 		break;
 	case '-':
 		Speed -= 1;
-		printf("Speed : %d", Speed);
+		printf("Speed : %d\n", Speed);
 		break;
 	case 's':
 		Speed = 0;
